@@ -141,11 +141,31 @@ function go(id){
 let data = [];
 
 function simpan(){
-  let n = document.getElementById("nama").value;
-  let m = document.getElementById("mapel").value;
+  let n = document.getElementById("nama").value.trim();
+  let m = document.getElementById("mapel").value.trim();
   let v = document.getElementById("nilaiInput").value;
 
+  if(n === "" || m === "" || v === ""){
+    alert("Isi semua data dulu!");
+    return;
+  }
+
+  v = Number(v);
+
+  if(isNaN(v)){
+    alert("Nilai harus angka!");
+    return;
+  }
+
   data.push({n,m,v});
+
+  tampil();
+  hitung();
+
+  document.getElementById("nama").value = "";
+  document.getElementById("mapel").value = "";
+  document.getElementById("nilaiInput").value = "";
+}  data.push({n,m,v});
 
   let html="";
   data.forEach(d=>{
