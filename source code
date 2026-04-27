@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Guru</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:Poppins; }
+body { background:#f1f5f9; }
+
+.navbar {
+  background:#15803d;
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:999;
+}
+
+/* FIX NAV MENU */
+.menu button {
+  background:none;
+  border:none;
+  color:white;
+  margin-left:15px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.container { padding:20px; }
+.section { margin-top:40px; }
+
+.cards {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+  margin-top:15px;
+}
+
+.card {
+  background:white;
+  padding:15px;
+  border-radius:10px;
+}
+
+.box {
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+input,select,button {
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+}
+
+button.main {
+  background:#15803d;
+  color:white;
+  border:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <h3>SMA Taruna Muhammadiyah Riau</h3>
+  <div class="menu">
+    <button onclick="go('beranda')">Beranda</button>
+    <button onclick="go('jadwal')">Jadwal</button>
+    <button onclick="go('nilai')">Nilai</button>
+    <button onclick="go('absensi')">Absensi</button>
+  </div>
+</div>
+
+<div class="container">
+
+<div id="beranda" class="section">
+  <h3>Selamat Datang Guru 👋</h3>
+
+  <div class="cards">
+    <div class="card">Total Siswa<br><b>120</b></div>
+    <div class="card">Jadwal<br><b>5</b></div>
+    <div class="card">Tugas<br><b>8</b></div>
+    <div class="card">Hadir<br><b>95%</b></div>
+  </div>
+</div>
+
+<div id="jadwal" class="section">
+  <h3>Jadwal</h3>
+  <div class="box">
+    08:00 - Matematika<br>
+    09:30 - Fisika
+  </div>
+</div>
+
+<div id="nilai" class="section">
+  <h3>Input Nilai</h3>
+  <div class="box">
+    <input id="nama" placeholder="Nama">
+    <input id="mapel" placeholder="Mapel">
+    <input id="nilaiInput" placeholder="Nilai">
+    <button class="main" onclick="simpan()">Simpan</button>
+
+    <div id="list"></div>
+  </div>
+</div>
+
+<div id="absensi" class="section">
+  <h3>Absensi</h3>
+  <div class="box">
+    <select id="absen">
+      <option>Hadir</option>
+      <option>Izin</option>
+      <option>Tidak Hadir</option>
+    </select>
+    <button class="main" onclick="absen()">Simpan</button>
+    <p id="status"></p>
+  </div>
+</div>
+
+</div>
+
+<script>
+function go(id){
+  document.getElementById(id).scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+let data = [];
+
+function simpan(){
+  let n = document.getElementById("nama").value;
+  let m = document.getElementById("mapel").value;
+  let v = document.getElementById("nilaiInput").value;
+
+  data.push({n,m,v});
+
+  let html="";
+  data.forEach(d=>{
+    html += `<p>${d.n} - ${d.m} (${d.v})</p>`;
+  });
+
+  document.getElementById("list").innerHTML = html;
+}
+
+function absen(){
+  let a = document.getElementById("absen").value;
+  document.getElementById("status").innerText = "Status: " + a;
+}
+</script>
+
+</body>
+</html>
